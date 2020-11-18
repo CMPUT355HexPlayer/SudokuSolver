@@ -15,8 +15,13 @@ availableMoves = ["1","1","1","1",
 		 			  "1","1","1","1",
 		  			    "1","1","1","1"]
 
+moves = []
+
 #Is the game still going?
 game = True
+
+#Is it the Enemy's turn?
+enemyTurn = False
 
 
 #FUNCTIONS
@@ -31,14 +36,19 @@ def showBoard(brd):
 	print(" ")
 
 #Takes the user's move and adjusts the board and available moves.
-def processMove(brd, x):
-	y = brd.index(x)
+def processMove(brd,x):
+	global enemyTurn
+	moved = x in moves
 
-	if (availableMoves[y] == "1"):
+	if (moved):
+		print(" ")
+		print("INVALID MOVE!")
+	else:
+		y = brd.index(x)
 		brd[y] = "X"
 		availableMoves[y] = "0"
-	else:
-		print("Invalid move")
+		moves.append(x)
+		enemyTurn = True
 
 # Clears terminal display.
 def clear(): 
@@ -52,6 +62,21 @@ def clear():
     else: 
         _ = system('clear') 
 
+def enemyMove(brd,x):
+	global enemyTurn
+	
+	x = random.randrange(0,15)
+
+	if (availableMoves[x] == "1"):
+		y = brd[x]
+		brd[x] = "O"
+		availableMoves[x] = "0"
+		moves.append(y)
+		enemyTurn = False
+	else:
+		enemyMove(brd,x)
+
+
 
 
 #MAIN PROGRAM:
@@ -61,9 +86,12 @@ print("Welcome to 4x4 Hex!")
 
 
 while(game):
+	
 	showBoard(brd)
 	x = input("Which letter do you want to move to: ")
 	processMove(brd,x)
+	if (enemyTurn == True):
+		enemyMove(brd,x)
 
 	
 

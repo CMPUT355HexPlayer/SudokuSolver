@@ -15,6 +15,8 @@ availableMoves = ["1","1","1","1",
 		 			  "1","1","1","1",
 		  			    "1","1","1","1"]
 
+moves = []
+
 #Is the game still going?
 game = True
 
@@ -32,13 +34,16 @@ def showBoard(brd):
 
 #Takes the user's move and adjusts the board and available moves.
 def processMove(brd, x):
-	y = brd.index(x)
+	moved = x in moves
 
-	if (availableMoves[y] == "1"):
+	if (moved):
+		print(" ")
+		print("INVALID MOVE!")
+	else:
+		y = brd.index(x)
 		brd[y] = "X"
 		availableMoves[y] = "0"
-	else:
-		print("Invalid move")
+		moves.append(x)
 
 # Clears terminal display.
 def clear(): 

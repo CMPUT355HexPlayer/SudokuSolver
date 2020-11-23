@@ -1,5 +1,4 @@
 import fileinput
-import time
 
 def print_sudoku(s):
     """
@@ -95,8 +94,6 @@ def DFS_solve(s, row, col):
     return DFS_solve(s, row, col+1)
 
 def main():
-    start = time.time()
-    num_puzzles = 0
     s = []
     text = ""
 
@@ -117,8 +114,6 @@ def main():
         s.append(l)
 
         if len(s) == 9:
-            num_puzzles += 1
-            print("Puzzle Number {:d}".format(num_puzzles))
             print("Original:")
             print_sudoku(s)
 
@@ -133,8 +128,6 @@ def main():
 
             print("="*30)
             s = []
-
-    print("{:.2f} seconds to solve {} puzzles".format(time.time() - start, num_puzzles))
 
 if __name__ == "__main__":
     main()

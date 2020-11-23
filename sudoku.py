@@ -28,8 +28,8 @@ def test_cell(s, row, col):
 
     # Row and Column
     for m in range(9):
-        used[s[m][col]] = 1;
-        used[s[row][m]] = 1;
+        used[s[m][col]] = 1
+        used[s[row][m]] = 1
 
     # Square
     for m in range(3):

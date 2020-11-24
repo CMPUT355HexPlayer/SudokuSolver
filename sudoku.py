@@ -15,22 +15,18 @@ def display_puzzle(s):
     
     for row in range(9):
         for col in range(9):
-
             if (s[row][col] == 0):
                 print(Fore.RED + Style.BRIGHT + ' ', '·', end='' + Style.RESET_ALL)
-
             else:    
                 print(' ', s[row][col], end='')
 
             if ((col == 2) | (col == 5)): 
                 print(Fore.GREEN + Style.BRIGHT + " |", end='' + Style.RESET_ALL)
-
             else:
                 print(Fore.BLUE + Style.BRIGHT + " |", end='' + Style.RESET_ALL)
 
         if ((row == 2) | (row == 5)): 
             print("\n"+ Fore.GREEN + Style.BRIGHT + "+---" + "+----"*8 + "+" + Style.RESET_ALL)
-
         else:
             print("\n"+ Fore.BLUE + Style.BRIGHT + "+---" + "+----"*8 + "+" + Style.RESET_ALL)
 

@@ -3,7 +3,7 @@ Simple Sudoku solver/generator created in Python.
 
 #About
 
-Solver: The program will scan each cell at first and only if there exists one possibility , it will insert that number. The program will continue doing this until the puzzle gets stuck. The program then runs a backtracking DFS search to try out the possibilities and eliminates those that do not work along with its children.
+The Solver: The program will scan each cell at first and only if there exists one possibility , it will insert that number. The program will continue doing this until the puzzle gets stuck. The program then runs a backtracking DFS search to try out the possibilities and eliminates those that do not work along with its children.
 
 Our primary aim was for code readability and simplicity over a competitive running time, although this program can solve a Sudoku puzzle in ~0.2s on average. 
 
@@ -17,6 +17,6 @@ To run the solver:
 
 To run the generator:
 
-    python pyGen.py
+    python sudokuGen.py
 
 The puzzle generator writes to a file named "SudokuPuzzles.txt", with each puzzle being represented as one line of integers read from the top left to the bottom right of the grid.

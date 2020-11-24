@@ -37,21 +37,21 @@ def test_cell(s, row, col):
 
     return used
 
-def initial_try(s):
+def first_try(s):
     """
     Given a Sudoku puzzle, try to solve the puzzle by iterating through each
     cell and determining the possible numbers in that cell. If only one possible
-    number exists, fill it in and continue on until the puzzle is stuck.
+    number exists, fill it in and continue till the puzzle is stuck.
     """
-    stuck = False
+    puzzle_stuck = False
 
-    while not stuck:
-        stuck = True
+    while not puzzle_stuck:
+        puzzle_stuck = True
         # Iterate through the Sudoku puzzle
         for row in range(9):
             for col in range(9):
                 used = test_cell(s, row, col)
-                # More than one possibility
+                # If there is more than one possibility
                 if used.count(0) != 1:
                     continue
 
@@ -60,14 +60,14 @@ def initial_try(s):
                     # then fill in the current cell
                     if s[row][col] == 0 and used[m] == 0:
                         s[row][col] = m
-                        stuck = False
+                        puzzle_stuck = False
                         break
 
 def dfs(s, row, col):
     """
-    Given a Sudoku puzzle, solve the puzzle by recursively performing DFS
-    which tries out the possible solutions and by using backtracking (eliminating
-    invalid tries and all the possible cases arising from those tries)
+    Given a Sudoku puzzle, solve the puzzle by recursively performing backtracking DFS
+    which tries out the possible solutions and eliminating
+    invalid tries and all the possible cases arising from those invalid tries
     """
     if row == 8 and col == 8:
         used = test_cell(s, row, col)
@@ -87,7 +87,7 @@ def dfs(s, row, col):
                 if dfs(s, row, col+1):
                     return True
 
-        # Reached here? Then we tried 1-9 without success
+        # If it reached here it means we tried 1-9 without success
         s[row][col] = 0
         return False
 
@@ -117,7 +117,7 @@ def main():
         # Display a 9x9 puzzle
         display_puzzle(sdku)
 
-        initial_try(sdku)
+        first_try(sdku)
         if (any(0 in i for i in sdku)):
                 dfs(sdku, 0, 0)
 

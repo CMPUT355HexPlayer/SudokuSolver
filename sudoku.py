@@ -1,6 +1,6 @@
 import fileinput
 
-def print_sudoku(s):
+def display_puzzle(s):
     """
     Formats the Sudoku puzzle currently in a 2D list into
     a grid with lines separating the blocks for readability
@@ -63,7 +63,7 @@ def initial_try(s):
                         stuck = False
                         break
 
-def DFS_solve(s, row, col):
+def dfs(s, row, col):
     """
     Given a Sudoku puzzle, solve the puzzle by recursively performing DFS
     which tries out the possible solutions and by using backtracking (eliminating
@@ -84,50 +84,48 @@ def DFS_solve(s, row, col):
         for i in range(1, 10):
             if used[i] == 0:
                 s[row][col] = i
-                if DFS_solve(s, row, col+1):
+                if dfs(s, row, col+1):
                     return True
 
         # Reached here? Then we tried 1-9 without success
         s[row][col] = 0
         return False
 
-    return DFS_solve(s, row, col+1)
+    return dfs(s, row, col+1)
 
 def main():
-    s = []
+    puzzle_no = 0
     text = ""
 
+    # Get all the lines from the input
     for line in fileinput.input():
         line = ' '.join(line.split())
         text += line
 
-    while len(text) > 0:
-        l = []
+    # Keep only the numbers from the input
+    text = [int(i) for i in text if i.isdigit()]
 
-        # Get a row of numbers
-        while len(l) < 9:
-            if text[0].isdigit():
-                l.append(int(text[0]))
-            text = text[1:]
+    # Separate the numbers for 9x9 sudoku puzzles
+    nbrs = [list(text[i:i+9])for i in range(0, len(text), 9)]
 
-        # Insert that row into the Sudoku grid
-        s.append(l)
+    
+    while(len(nbrs) >= 9):  
+        puzzle_no += 1 
+        sdku = nbrs[:9]
+        print("Puzzle {f}: ".format(f=puzzle_no))
 
-        if len(s) == 9:
-            print("Original:")
-            print_sudoku(s)
+        # Display a 9x9 puzzle
+        display_puzzle(sdku)
 
-            initial_try(s)
-            for line in s:
-                if 0 in line:
-                    DFS_solve(s, 0, 0)
-                    break
+        initial_try(sdku)
+        if (any(0 in i for i in sdku)):
+                dfs(sdku, 0, 0)
 
-            print("Solution:")
-            print_sudoku(s)
+        print("Solution:")
+        display_puzzle(sdku)
 
-            print("="*30)
-            s = []
+        print("="*30)
+        nbrs = nbrs[9:]
 
 if __name__ == "__main__":
     main()

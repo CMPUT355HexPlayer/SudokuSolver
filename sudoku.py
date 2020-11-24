@@ -1,4 +1,5 @@
 import fileinput
+import time
 from colorama import init
 init()
 
@@ -7,28 +8,33 @@ from colorama import Fore, Back, Style
 def display_puzzle(s):
     """
     Formats the Sudoku puzzle currently in a list into a sudoku grid
-    Replaces the 0s of the puzzle with '·' for visualization purposes
+    Replaces the 0s of the puzzle with ' ' for visualization purposes
     Changes the colors of the text
     """
 
-    print(Fore.BLUE+ Style.BRIGHT + '+---' + "+----"*8 + "+" + Style.RESET_ALL)
+    print(Fore.BLUE+ Style.BRIGHT + '+---'
+    + "+----"*8 + "+" + Style.RESET_ALL)
     
     for row in range(9):
         for col in range(9):
             if (s[row][col] == 0):
-                print(Fore.RED + Style.BRIGHT + ' ', '·', end='' + Style.RESET_ALL)
+                print(' ', ' ', end='')
             else:    
                 print(' ', s[row][col], end='')
 
             if ((col == 2) | (col == 5)): 
-                print(Fore.GREEN + Style.BRIGHT + " |", end='' + Style.RESET_ALL)
+                print(Fore.GREEN + Style.BRIGHT
+                + " |", end='' + Style.RESET_ALL)
             else:
-                print(Fore.BLUE + Style.BRIGHT + " |", end='' + Style.RESET_ALL)
+                print(Fore.BLUE + Style.BRIGHT + " |",
+                end='' + Style.RESET_ALL)
 
         if ((row == 2) | (row == 5)): 
-            print("\n"+ Fore.GREEN + Style.BRIGHT + "+---" + "+----"*8 + "+" + Style.RESET_ALL)
+            print("\n"+ Fore.GREEN + Style.BRIGHT + "+---"
+            + "+----"*8 + "+" + Style.RESET_ALL)
         else:
-            print("\n"+ Fore.BLUE + Style.BRIGHT + "+---" + "+----"*8 + "+" + Style.RESET_ALL)
+            print("\n"+ Fore.BLUE + Style.BRIGHT + "+---"
+            + "+----"*8 + "+" + Style.RESET_ALL)
 
     print()
 
@@ -111,6 +117,7 @@ def dfs(s, row, col):
     return dfs(s, row, col+1)
 
 def main():
+    start = time.time()
     puzzle_no = 0
     text = ""
 
@@ -143,6 +150,8 @@ def main():
 
         print("="*45 + "\n")
         nbrs = nbrs[9:]
+
+    print("The program took {:.2f} seconds to solve {} puzzle(s).".format(time.time() - start, puzzle_no))        
 
 if __name__ == "__main__":
     main()

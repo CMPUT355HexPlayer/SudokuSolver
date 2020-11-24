@@ -13,7 +13,7 @@ The Generator: The generator starts with an empty 9x9 grid and fills it up by it
 
 To run the solver:
 
-    python sudoku.py Sudokus.txt
+    python sudoku.py Sudopuzzle.txt
 
 To run the generator:
 

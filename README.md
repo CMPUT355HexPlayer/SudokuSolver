@@ -19,4 +19,4 @@ To run the generator:
 
     python sudokuGen.py
 
-The puzzle generator writes to a file named "SudokuPuzzles.txt", with each puzzle being represented as one line of integers read from the top left to the bottom right of the grid.
+The puzzle generator writes to a file named "Sudopuzzle.txt", with each puzzle being represented as one line of integers read from the top left to the bottom right of the grid.

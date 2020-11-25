@@ -97,6 +97,8 @@ def puzzleDifficulty(puzzle, difficulty):
     """
     Takes in a complete puzzle, and removes the numbers in the puzzle 
     and run the solvePuzzle function on the puzzle
+    If the user specified an easy puzzle then we stop after a solution is found
+    else we continue to take out more numbers to see if the puzzle can be made harder
     """
     indicies = list(range(81)) # generate indicies 1- 80 representing the indicies in the puzzle
     random.shuffle(indicies)

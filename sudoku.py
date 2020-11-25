@@ -38,27 +38,29 @@ def display_puzzle(s):
 
     print()
 
-def test_cell(s, row, col):
+def valid_nbrs(s, row, col):
     """
-    Given a Sudoku puzzle s, row, and column number, return a list which represents
-    the valid numbers that can go in that cell. 0 = possible, 1 = not possible
+    Valid_nbrs returns a list of all the numbers from 0-9 that can go into the cell
+    given its row and col position as well as the s grid.
+    The value is 0 if the number can go into the cell, 1 if not.
     """
-    used = [0]*10
-    used[0] = 1
-    block_row = row // 3
-    block_col = col // 3
+
+    corner_row = row // 3
+    corner_col = col // 3
+    used_cells = [0]*10
+    used_cells[0] = 1
 
     # Row and Column
-    for m in range(9):
-        used[s[m][col]] = 1
-        used[s[row][m]] = 1
+    for val in range(9):
+        used_cells[s[val][col]] = 1
+        used_cells[s[row][val]] = 1
 
     # Square
-    for m in range(3):
-        for n in range(3):
-            used[s[m + block_row*3][n + block_col*3]] = 1
+    for c in range(3):
+        for r in range(3):
+            used_cells[s[c + corner_row*3][r + corner_col*3]] = 1
 
-    return used
+    return used_cells
 
 def first_try(s):
     """
@@ -73,7 +75,7 @@ def first_try(s):
         # Iterate through the Sudoku puzzle
         for row in range(9):
             for col in range(9):
-                used = test_cell(s, row, col)
+                used = valid_nbrs(s, row, col)
                 # If there is more than one possibility
                 if used.count(0) != 1:
                     continue
@@ -93,7 +95,7 @@ def dfs(s, row, col):
     invalid tries and all the possible cases arising from those invalid tries
     """
     if row == 8 and col == 8:
-        used = test_cell(s, row, col)
+        used = valid_nbrs(s, row, col)
         if 0 in used:
             s[row][col] = used.index(0)
         return True
@@ -103,7 +105,7 @@ def dfs(s, row, col):
         col = 0
 
     if s[row][col] == 0:
-        used = test_cell(s, row, col)
+        used = valid_nbrs(s, row, col)
         for i in range(1, 10):
             if used[i] == 0:
                 s[row][col] = i

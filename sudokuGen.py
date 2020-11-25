@@ -40,7 +40,7 @@ def populateGridPuzzle(puzzle, row, col):
     puzzle grid to blank and returns False.
     """
     if row == 8 and col == 8:
-        usedNum = sudoku.test_cell(puzzle, row, col)
+        usedNum = sudoku.valid_nbrs(puzzle, row, col)
         puzzle[row][col] = usedNum.index(0)
         return True
 
@@ -76,7 +76,7 @@ def solvePuzzle(copyPuzzle, row, col):
         col = 0
 
     if copyPuzzle[row][col] == 0:
-        usedNum = sudoku.test_cell(copyPuzzle, row, col) # checks if the number in already used in the grid puzzle
+        usedNum = sudoku.valid_nbrs(copyPuzzle, row, col) # checks if the number in already used in the grid puzzle
         # if 0 is not in usedNum then the number is already being used
         if 0 not in usedNum: 
             return 0

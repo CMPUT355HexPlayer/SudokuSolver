@@ -191,6 +191,7 @@ def main():
         populateGridPuzzle(puzzle, 0, 0)
         puzzleDifficulty(puzzle, q)
         convertPuzzle = convertToOneline(puzzle)
+        print("Puzzle", str(_ + 1))
         outputGrid(puzzle)
         print("\n")
         fileOutput.write(convertPuzzle)

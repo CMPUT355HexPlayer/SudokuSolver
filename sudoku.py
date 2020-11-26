@@ -1,9 +1,9 @@
 import fileinput
 import time
-from colorama import init
-init()
+# from colorama import init
+# init()
 
-from colorama import Fore, Back, Style
+# from colorama import Fore, Back, Style
 
 def display_puzzle(s):
     """
@@ -12,8 +12,7 @@ def display_puzzle(s):
     Changes the colors of the text
     """
 
-    print(Fore.BLUE+ Style.BRIGHT + '+---'
-    + "+----"*8 + "+" + Style.RESET_ALL)
+    print('+---' + "+----"*8 + "+")
     
     for row in range(9):
         for col in range(9):
@@ -22,19 +21,16 @@ def display_puzzle(s):
             else:    
                 print(' ', s[row][col], end='')
 
-            if ((col == 2) | (col == 5)): 
-                print(Fore.GREEN + Style.BRIGHT
-                + " |", end='' + Style.RESET_ALL)
+            if ((col == 2) | (col == 5) | (col == 8)): 
+                print(" |", end='')
             else:
-                print(Fore.BLUE + Style.BRIGHT + " |",
-                end='' + Style.RESET_ALL)
+                print("  ", end='')
 
-        if ((row == 2) | (row == 5)): 
-            print("\n"+ Fore.GREEN + Style.BRIGHT + "+---"
-            + "+----"*8 + "+" + Style.RESET_ALL)
+        if ((row == 2) | (row == 5) | (row == 8)): 
+            print("\n" + "+---"
+            + "+----"*8 + "+")
         else:
-            print("\n"+ Fore.BLUE + Style.BRIGHT + "+---"
-            + "+----"*8 + "+" + Style.RESET_ALL)
+            print("\n" + "   ")
 
     print()
 
